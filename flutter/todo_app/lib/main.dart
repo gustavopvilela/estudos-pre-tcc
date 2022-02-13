@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'models/item.dart'; // interface do android, a do iOS é a cupertino
 
@@ -33,10 +37,6 @@ class HomePage extends StatefulWidget {
 
   HomePage({Key? key}) : super(key: key) {
     items = [];
-
-    items!.add(Item(title: "Item 1", isDone: false));
-    items!.add(Item(title: "Item 2", isDone: true));
-    items!.add(Item(title: "Item 3", isDone: false));
   }
   
   @override
@@ -60,15 +60,43 @@ class _HomePageState extends State<HomePage> { // as coisas que vão aparecer em
       );
 
       newTaskControl.clear();
+      save();
     });
   }
   
   void remove(int index) {
     setState(() {
       widget.items!.removeAt(index);
+      save();
     });
   }
 
+  Future load() async { // função assíncrona, são coisas que não se recebem em tempo real
+    var prefs = await SharedPreferences.getInstance();
+
+    var data = prefs.getString('data');
+
+    if (data != null) {
+      Iterable decoded = jsonDecode(data); // é uma coluna onde tem uma iteração, então é possível fazer loops nela
+
+      List<Item> result = decoded.map((x) => Item.fromJson(x)).toList();
+
+      setState(() {
+        widget.items = result;
+      });
+    }
+  }
+  
+  save() async {
+    var prefs = await SharedPreferences.getInstance();
+    
+    await prefs.setString('data', jsonEncode(widget.items));
+  }
+  
+  _HomePageState() {
+    load();
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold( // Scaffold representa uma página
@@ -101,6 +129,7 @@ class _HomePageState extends State<HomePage> { // as coisas que vão aparecer em
               onChanged: (value) {
                 setState(() { // só funciona em stateful, ele muda o estado da coisa, em grosso modo
                   item.isDone = value!;
+                  save();
                 });
               },
             ),
