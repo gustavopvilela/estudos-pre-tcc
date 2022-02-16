@@ -27,5 +27,26 @@ Este repositório é utilizado para estudos de Dart e Flutter pelo curso *[Flutt
 9. Os identificadores podem começar com uma letra ou sublinhado (_), seguido por qualquer combinação desses caracteres mais dígitos.
 10. O Dart tem expressões (que têm valores de tempo de execução) e instruções (que não têm). Por exemplo, a expressão condicional *condition ? expr1 : expr2* tem um valor de *expr1* ou *expr2*. Compare isso com uma instrução *if-else*, que não tem valor. Uma instrução geralmente contém uma ou mais expressões, mas uma expressão não pode conter diretamente uma instrução.
 11. As ferramentas Dart podem relatar dois tipos de problemas: avisos e erros. 
-11.1. Os avisos são apenas indicações de que seu código pode não funcionar, mas não impedem que seu programa seja executado.
-11.2. Os erros podem ser em tempo de compilação ou em tempo de execução. Um erro em tempo de compilação impede que o código seja executado; um erro em tempo de execução resulta em uma exceção sendo gerada enquanto o código é executado.
+    - Os avisos são apenas indicações de que seu código pode não funcionar, mas não impedem que seu programa seja executado.
+    - Os erros podem ser em tempo de compilação ou em tempo de execução. Um erro em tempo de compilação impede que o código seja executado; um erro em tempo de execução resulta em uma exceção sendo gerada enquanto o código é executado.
+
+### Palavras reservadas
+Há palavras que o Dart trata de forma especial, então, utilizá-las, por exemplo, em variáveis, pode dar erro no código. Algumas delas são:
+- class
+- const
+- final
+- finally
+- get
+- hide
+- rethrow
+- super
+- switch
+- yield
+
+Algumas palavras são **palavras-chave contextuais**, que **têm significado apenas em lugares específicos**. Elas são identificadores válidos em todos os lugares.
+
+Algumas palavras são **identificadores internos**. Essas palavras-chave **são identificadores válidos na maioria dos lugares**, mas **não podem ser usadas como nomes de classe ou tipo ou como prefixos de importação**.
+
+Algumas palavras são **palavras reservadas limitadas relacionadas ao suporte de assincronia**. **Não** é permitido usar ***await* ou *yield* como um identificador em nenhum corpo de função** marcado com async, async* ou sync*.
+
+A maioria das palavras são palavras reservadas que **não** podem ser identificadores. Para mais informações, acesse [aqui](https://dart.dev/guides/language/language-tour#keywords).
