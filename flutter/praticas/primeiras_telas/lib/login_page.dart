@@ -23,7 +23,7 @@ class _LoginPageState extends State<LoginPage> {
                 height: 400,
                 width: 400,
                 
-                child: Image.network('https://www.pngitem.com/pimgs/m/40-404600_transparent-senior-citizen-png-elderly-illustration-png-download.png')
+                child: Image.asset('assets/images/login_image.png'),
               ),
               
               Padding(
